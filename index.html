@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Frontend Mentor | Todo app</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  </head>
+  <body>
+    <section-bg-top>
+      <img src="images/bg-desktop-dark.jpg" alt="bg-desktop-dark" />
+    </section-bg-top>
+    <section class="main-section">
+      <div class="logo flex-jc-sb">
+        <h1>T o d o</h1>
+        <button id="toggleTheme">
+          <img src="images/icon-sun.svg" alt="theme-toggle" />
+        </button>
+      </div>
+      <div class="todo_app">
+        <div class="todo_app-input">
+          <div class="input-circle"></div>
+          <input type="text" id="todo-input" placeholder="Enter a new todo" />
+        </div>
+        <div class="todo_app-output">
+          <ul id="todo-list" class="todo-list"></ul>
+        </div>
+      </div>
+      <!-- <div class="todo-app">
+        <div class="margin-bt flex add-to">
+          <input type="checkbox" value="course" placeholder="course" />
+          <label for="course" contenteditable="">Currently typing</label>
+        </div>
+        <div class="todo-section">
+          <form action="#">
+            <div class="margin-bt flex">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">Complete online Javascript course</label>
+            </div>
+            <hr />
+            <div class="margin-bt">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">Jog around the park 3x</label>
+            </div>
+            <hr />
+            <div class="margin-bt">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">10 minutes meditation</label>
+            </div>
+            <hr />
+            <div class="margin-bt">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">Read for 1 hour</label>
+            </div>
+            <hr />
+            <div class="margin-bt">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">Pick up groceries</label>
+            </div>
+            <hr />
+            <div class="margin-bt">
+              <input type="checkbox" value="course" placeholder="course" />
+              <label for="course">Complete Todo App on Frontend Mentor</label>
+            </div>
+            <hr />
+          </form>
+          <div class="bottom flex-jc-sb">
+            <p>5 items left</p>
+            <div class="status flex-jc-sb">
+              <button>All</button>
+              <button>Active</button>
+              <button>Completed</button>
+            </div>
+            <p>Clear Completed</p>
+          </div>
+        </div>
+      </div> -->
+    </section>
+
+    <div class="attribution">
+      Challenge by
+      <a
+        rel="noopener"
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
