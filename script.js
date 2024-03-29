@@ -7,47 +7,68 @@ document.addEventListener('DOMContentLoaded', function () {
   const allTodos = document.getElementById('all-todos');
   const activeTodos = document.getElementById('active-todos');
   const completedTodos = document.getElementById('completed-todos');
+  const todoOutputContainer = document.querySelector('.todo-output-container');
+  const bgTop = document.getElementById('bg-top');
 
-  console.log(allTodos);
-  console.log(activeTodos);
-  console.log(completedTodos);
+  console.log(todoOutputContainer);
 
-  toggleTheme.addEventListener('click', function () {
-    body.classList.toggle('Light-Theme');
-  });
+  let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
-  let todos = [];
+  const renderTodoList = () => {
+    todoList.innerHTML = '';
+    todos.forEach((todo) => {
+      const li = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = todo.status === 'completed';
+      li.appendChild(checkbox);
 
-  function updateOutputVisibility() {
-    if (todos.length === 0) {
-      todoOutput.style.display = 'none';
-    } else {
-      todoOutput.style.display = 'block';
-    }
-  }
+      const label = document.createElement('label');
+      label.textContent = todo.text;
+      li.appendChild(label);
 
-  updateOutputVisibility();
+      if (todo.status === 'completed') {
+        label.classList.add('completed');
+      }
 
-  let todoInput = document.getElementById('todo-input');
-  todoInput.addEventListener('keypress', function (event) {
-    if (event.key === 'Enter') {
-      addTodo();
-    }
-  });
+      li.addEventListener('click', () => toggleTodoStatus(todo.id));
+      todoList.appendChild(li);
+    });
+
+    updateTodoCount();
+  };
+
+  const updateTodoCount = () => {
+    const activeTodosCount = todos.filter(
+      (todo) => todo.status === 'pending'
+    ).length;
+    todoCount.innerText = activeTodosCount;
+  };
+
+  const updateOutputVisibility = () => {
+    // todoOutput.style.display = todos.length > 0 ? 'block' : 'none';
+    todoOutputContainer.style.display = todos.length > 0 ? 'block' : 'none';
+  };
 
   const addTodo = () => {
-    let todoText = todoInput.value.trim();
+    const todoInput = document.getElementById('todo-input');
+    const todoText = todoInput.value.trim();
     if (todoText !== '') {
-      let todoItem = {
+      const todoItem = {
         id: crypto.randomUUID(),
         text: todoText,
         status: 'pending',
       };
       todos.push(todoItem);
+      saveTodos();
       renderTodoList();
       updateOutputVisibility();
       todoInput.value = '';
     }
+  };
+
+  const saveTodos = () => {
+    localStorage.setItem('todos', JSON.stringify(todos));
   };
 
   const toggleTodoStatus = (id) => {
@@ -57,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       return todo;
     });
+    saveTodos();
     renderTodoList();
-    updateOutputVisibility();
   };
 
   const showPendingTodos = () => {
@@ -67,52 +88,47 @@ document.addEventListener('DOMContentLoaded', function () {
     updateOutputVisibility();
   };
 
-  // FIXME: Only show todos with the status of completed
-  const clearTodos = () => {
-    todos = [];
+  const showCompletedTodos = () => {
+    todos = todos.filter((todo) => todo.status === 'completed');
     renderTodoList();
     updateOutputVisibility();
   };
 
-  const clearTodosBtn = document.getElementById('clear-todos');
-
-  clearTodosBtn.addEventListener('click', showPendingTodos);
-
-  const renderTodoList = () => {
-    todoList.innerHTML = '';
-    todos.forEach((todo) => {
-      let li = document.createElement('li');
-      let checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      li.appendChild(checkbox);
-      let label = document.createElement('label');
-      label.textContent = todo.text;
-      li.appendChild(label);
-
-      todoCount.innerText = todos.length;
-      if (todo.status === 'pending') {
-        todoCount.innerText = todos.filter(
-          (todo) => todo.status === 'pending'
-        ).length;
-      }
-
-      if (todo.status === 'completed') {
-        checkbox.checked = true;
-        li.style.textDecoration = 'line-through';
-      }
-
-      li.addEventListener('click', () => toggleTodoStatus(todo.id));
-      todoList.appendChild(li);
-    });
+  const clearTodos = () => {
+    todos = [];
+    localStorage.removeItem('todos');
+    renderTodoList();
+    updateOutputVisibility();
   };
 
-  // allTodos.addEventListener('click', renderTodoList);
-  // activeTodos.addEventListener('click', showPendingTodos);
-  // const showCompletedTodos = () => {
-  //   todos = todos.filter((todo) => todo.status === 'completed');
-  //   renderTodoList();
-  //   updateOutputVisibility();
-  // };
+  toggleTheme.addEventListener('click', () => {
+    //
+    body.classList.toggle('light-theme');
+    if (body.classList.contains('light-theme')) {
+      bgTop.innerHTML = `<img src="images/bg-desktop-light.jpg" alt="bg-desktop-light" />`;
+      toggleTheme.innerHTML = `<img src="images/icon-moon.svg" alt="theme-toggle" />`;
+    } else {
+      bgTop.innerHTML = `<img src="images/bg-desktop-dark.jpg" alt="bg-desktop-dark" />`;
+      toggleTheme.innerHTML = `<img src="images/icon-sun.svg" alt="theme-toggle" />`;
+    }
+  });
 
-  // completedTodos.addEventListener('click', showCompletedTodos);
+  const todoInput = document.getElementById('todo-input');
+  todoInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      addTodo();
+    }
+  });
+
+  const clearTodosBtn = document.getElementById('clear-todos');
+  clearTodosBtn.addEventListener('click', clearTodos);
+
+  allTodos.addEventListener('click', renderTodoList);
+  activeTodos.addEventListener('click', showPendingTodos);
+  completedTodos.addEventListener('click', showCompletedTodos);
+
+  renderTodoList();
+  updateOutputVisibility();
 });
+
+// TODO: Drag and drop

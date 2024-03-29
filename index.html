@@ -11,16 +11,17 @@
       sizes="32x32"
       href="./images/favicon-32x32.png"
     />
-    <link rel="stylesheet" href="style.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Frontend Mentor | Todo app</title>
 
     <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   </head>
   <body>
-    <section-bg-top>
+    <section class="bg-top" id="bg-top">
       <img src="images/bg-desktop-dark.jpg" alt="bg-desktop-dark" />
-    </section-bg-top>
+    </section>
     <section class="main-section">
       <div class="logo flex-jc-sb">
         <h1>T o d o</h1>
@@ -31,24 +32,31 @@
       <div class="todo_app">
         <div class="todo_app-input">
           <div class="input-circle"></div>
-          <input type="text" id="todo-input" placeholder="Enter a new todo" />
+          <input
+            type="text"
+            id="todo-input"
+            placeholder="Create a new todo..."
+          />
         </div>
-        <div class="todo_app-output" id="todoOutput">
-          <ul id="todo-list" class="todo-list"></ul>
+        <div class="todo-output-container">
+          <div class="todo_app-output" id="todoOutput">
+            <ul id="todo-list" class="todo-list"></ul>
 
-          <div class="todo-info-tab">
-            <p><span id="todo-count"></span> items left</p>
+            <div class="todo-info-tab">
+              <p><span id="todo-count"></span> items left</p>
 
-            <div class="status">
-              <ul>
-                <li><button id="all-todos">All</button></li>
-                <li><button id="active-todos">Active</button></li>
-                <li><button id="completed-todos">Completed</button></li>
-              </ul>
+              <div class="status">
+                <ul>
+                  <li><button id="all-todos">All</button></li>
+                  <li><button id="active-todos">Active</button></li>
+                  <li><button id="completed-todos">Completed</button></li>
+                </ul>
+              </div>
+
+              <button id="clear-todos">Clear Completed</button>
             </div>
-
-            <button id="clear-todos">Clear Completed</button>
           </div>
+          <p class="drag-and-drop">Drag and drop to reorder list</p>
         </div>
       </div>
     </section>
