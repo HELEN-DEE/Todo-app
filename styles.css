@@ -148,7 +148,6 @@ input {
 }
 
 .input-circle {
-  /* background: red; */
   border: 1px solid var(--text-secondary-color);
   width: 22px;
   height: 20px;
@@ -171,22 +170,20 @@ input {
 .todo_app-output {
   margin-top: 1rem;
   padding: 10px 0px;
-  /* color: #fff; */
   background-color: var(--todos-bg-color);
 }
 
 .todo-list {
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
   gap: 0.5rem;
-  /* justify-items: ; */
 }
 
 .todo-list li {
   padding: 10px 0 10px;
-  cursor: pointer;
+  cursor: grab;
   border-bottom: 1px solid var(--text-secondary-color);
+  transition: all 0.3s ease-in-out;
 }
 
 .todo-info-tab {

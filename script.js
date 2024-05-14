@@ -10,14 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const todoOutputContainer = document.querySelector('.todo-output-container');
   const bgTop = document.getElementById('bg-top');
 
-  console.log(todoOutputContainer);
-
   let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
   const renderTodoList = () => {
     todoList.innerHTML = '';
     todos.forEach((todo) => {
       const li = document.createElement('li');
+      li.setAttribute('draggable', true);
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
       checkbox.checked = todo.status === 'completed';
@@ -129,6 +128,51 @@ document.addEventListener('DOMContentLoaded', function () {
 
   renderTodoList();
   updateOutputVisibility();
-});
 
-// TODO: Drag and drop
+  let draggedItem = null;
+
+  todoList.addEventListener('dragstart', (event) => {
+    draggedItem = event.target;
+    setTimeout(() => {
+      draggedItem.style.display = 'none';
+    }, 0);
+  });
+
+  todoList.addEventListener('dragend', (event) => {
+    setTimeout(() => {
+      event.target.style.display = '';
+      draggedItem = null;
+    }, 0);
+  });
+
+  todoList.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    const afterElement = getDragAfterElement(todoList, event.clientY);
+    const currentElement = document.querySelector('.dragging');
+
+    if (afterElement == null) {
+      todoList.appendChild(draggedItem);
+    } else {
+      todoList.insertBefore(draggedItem, afterElement);
+    }
+  });
+
+  const getDragAfterElement = (container, y) => {
+    const draggableElements = [
+      ...container.querySelectorAll('li:not(.dragging)'),
+    ];
+
+    return draggableElements.reduce(
+      (closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).element;
+  };
+});
