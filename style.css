@@ -165,6 +165,7 @@ input[type='checkbox']:checked {
 .completed {
   text-decoration: line-through !important;
 }
+
 input {
   /* color: var(--Light-Grayish-Blue); */
   border-radius: 6px;

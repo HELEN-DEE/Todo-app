@@ -1,15 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+  // storing the html elements inside a variable
   const toggleTheme = document.getElementById('toggleTheme');
   const body = document.body;
   const todoOutput = document.getElementById('todoOutput');
   const todoList = document.getElementById('todo-list');
   const todoCount = document.getElementById('todo-count');
   const allTodos = document.getElementById('all-todos');
-  const activeTodos = document.getElementById('active-todos');
+  const activeTodos = document.getElementById('active-todos')
   const completedTodos = document.getElementById('completed-todos');
   const todoOutputContainer = document.querySelector('.todo-output-container');
   const bgTop = document.getElementById('bg-top');
 
+  // fetching existing todos from the local storage on the browser
   let todos = JSON.parse(localStorage.getItem('todos')) || [];
 
   const renderTodoList = () => {
