@@ -230,3 +230,23 @@ input {
   text-align: center;
   color: var(--primary-color);
 }
+
+@media screen and (max-width: 768px) {
+  .logo h1 {
+    font-size: 2rem;
+  }
+
+  .main-section {
+    margin: 0 10%;
+    position: none;
+    width: 80%;
+  }
+
+  .attribution {
+    bottom: -100%;
+    left: 0%;
+    margin: 0 30%;
+
+  }
+
+}
