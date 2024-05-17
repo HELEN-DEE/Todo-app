@@ -25,6 +25,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-primary-color);
   font-family: 'Josefin Sans', sans-serif;
+  /* The corrections I made */
   overflow-x: hidden !important;
   position: relative;
   transition: all 0.3s ease-in-out;
@@ -71,23 +72,23 @@ button:hover {
   display: flex;
 }
 
-.main-section {
-  margin: 0 auto;
-  position: absolute;
-  top: 110px;
-  width: 40%;
-  
-}
-
-.main-section-parent {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* The corrections I made */
 
 .bg-top {
+  transition: all 0.3s ease-in-out;
+}
+
+.bg-top img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-section {
+  margin: 0 33%;
+  position: absolute;
+  top: 110px;
+  width: 35%;
 }
 
 #toggleTheme {
@@ -134,11 +135,11 @@ input[type='checkbox']:checked {
 }
 
 .attribution {
-  position: absolute;
+  position: fixed;
   font-size: 11px;
   text-align: center;
-  bottom: -100%;
-  left: 40%;
+  bottom: 12px;
+  width: 100%;
 }
 .attribution a {
   color: var(--primary-color);
@@ -220,26 +221,12 @@ input {
 .drag-and-drop {
   font-size: 12px;
   text-align: center;
-  margin: 10% 0;
+  margin: 7% 0;
   color: var(--text-secondary-color);
 }
 
-@media screen and (max-width: 768px) {
-  .logo h1 {
-    font-size: 2rem;
-  }
-
-  .main-section {
-    margin: 0 10%;
-    position: none;
-    width: 80%;
-  }
-
-  .attribution {
-    bottom: -100%;
-    left: 0%;
-    margin: 0 30%;
-    
-  }
-
+/* The corrections I made */
+.no-todo {
+  text-align: center;
+  color: var(--primary-color);
 }
